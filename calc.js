@@ -167,17 +167,17 @@ const Calc = {
         }
     },
     mounted() {
-        this.firstQuarter.income = +(localStorage.getItem('firstQuarter_income') || 0);
-        this.firstQuarter.contrib = +(localStorage.getItem('firstQuarter_contrib') || 0);
+        this.firstQuarter.income = +localStorage.getItem('firstQuarter_income') || 0;
+        this.firstQuarter.contrib = +localStorage.getItem('firstQuarter_contrib') || 0;
 
-        this.secondQuarter.income = +(localStorage.getItem('secondQuarter_income') || 0);
-        this.secondQuarter.contrib = +(localStorage.getItem('secondQuarter_contrib') || 0);
+        this.secondQuarter.income = +localStorage.getItem('secondQuarter_income') || 0;
+        this.secondQuarter.contrib = +localStorage.getItem('secondQuarter_contrib') || 0;
 
-        this.thirdQuarter.income = +(localStorage.getItem('thirdQuarter_income') || 0);
-        this.thirdQuarter.contrib = +(localStorage.getItem('thirdQuarter_contrib') || 0);
+        this.thirdQuarter.income = +localStorage.getItem('thirdQuarter_income') || 0;
+        this.thirdQuarter.contrib = +localStorage.getItem('thirdQuarter_contrib') || 0;
 
-        this.fourthQuarter.income = +(localStorage.getItem('fourthQuarter_income') || 0);
-        this.fourthQuarter.contrib = +(localStorage.getItem('fourthQuarter_contrib') || 0);
+        this.fourthQuarter.income = +localStorage.getItem('fourthQuarter_income') || 0;
+        this.fourthQuarter.contrib = +localStorage.getItem('fourthQuarter_contrib') || 0;
     }
 };
 
