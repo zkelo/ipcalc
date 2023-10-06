@@ -135,6 +135,49 @@ const Calc = {
         onePercentAbove() {
             return this.incomeAbove * 0.01;
         }
+    },
+    watch: {
+        firstQuarter: {
+            handler(data) {
+                localStorage.setItem('firstQuarter_income', data.income);
+                localStorage.setItem('firstQuarter_contrib', data.contrib);
+            },
+            deep: true
+        },
+        secondQuarter: {
+            handler(data) {
+                localStorage.setItem('secondQuarter_income', data.income);
+                localStorage.setItem('secondQuarter_contrib', data.contrib);
+            },
+            deep: true
+        },
+        thirdQuarter: {
+            handler(data) {
+                localStorage.setItem('thirdQuarter_income', data.income);
+                localStorage.setItem('thirdQuarter_contrib', data.contrib);
+            },
+            deep: true
+        },
+        fourthQuarter: {
+            handler(data) {
+                localStorage.setItem('fourthQuarter_income', data.income);
+                localStorage.setItem('fourthQuarter_contrib', data.contrib);
+            },
+            deep: true
+        }
+    },
+    mounted() {
+        this.firstQuarter.income = localStorage.getItem('firstQuarter_income') || 0;
+        this.firstQuarter.contrib = localStorage.getItem('firstQuarter_contrib') || 0;
+
+        this.secondQuarter.income = localStorage.getItem('secondQuarter_income') || 0;
+        this.secondQuarter.contrib = localStorage.getItem('secondQuarter_contrib') || 0;
+
+        this.thirdQuarter.income = localStorage.getItem('thirdQuarter_income') || 0;
+        this.thirdQuarter.contrib = localStorage.getItem('thirdQuarter_contrib') || 0;
+
+        this.fourthQuarter.income = localStorage.getItem('fourthQuarter_income') || 0;
+        this.fourthQuarter.contrib = localStorage.getItem('fourthQuarter_contrib') || 0;
     }
 };
 
