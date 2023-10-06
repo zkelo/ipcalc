@@ -7,7 +7,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css' integrity='sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==' crossorigin='anonymous'/>
 </head>
 <body>
-    <div class="columns is-multiline ml-2 mt-1" id="calc">
+    <div class="columns is-multiline ml-1 mt-1" id="calc">
         <div class="column is-full">
             <h1 class="title">
                 Калькулятор ИП
@@ -26,7 +26,7 @@
             </div>
             <div class="field">
                 <div class="control">
-                    <button class="button" @click="evenlyContribs()">Распределить взносы равномерно поквартально</button>
+                    <button class="button" @click="evenlyContribs()">Распределить взносы</button>
                 </div>
             </div>
         </div>
@@ -40,146 +40,161 @@
         </div>
         <!-- Данные -->
         <div class="column is-full">
-            <table class="table is-bordered is-striped is-hoverable">
-                <thead>
-                    <tr>
-                        <th colspan="3">Данные</th>
-                    </tr>
-                    <tr>
-                        <th>Период</th>
-                        <th>Доходы, руб.</th>
-                        <th>Взносы, руб.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1 квартал</td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqIncome" v-model="firstQuarter.income" class="input">
+            <div class="table-container">
+                <table class="table is-bordered is-striped is-hoverable">
+                    <thead>
+                        <tr>
+                            <th colspan="3">Данные</th>
+                        </tr>
+                        <tr>
+                            <th>Период</th>
+                            <th>Доходы, руб.</th>
+                            <th>Взносы, руб.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 квартал</td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqIncome" v-model="firstQuarter.income" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqContrib" v-model="firstQuarter.contrib" class="input">
+                            </td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqContrib" v-model="firstQuarter.contrib" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2 квартал</td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqIncome" v-model="secondQuarter.income" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2 квартал</td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqIncome" v-model="secondQuarter.income" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqContrib" v-model="secondQuarter.contrib" class="input">
+                            </td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqContrib" v-model="secondQuarter.contrib" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3 квартал</td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqIncome" v-model="thirdQuarter.income" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3 квартал</td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqIncome" v-model="thirdQuarter.income" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqContrib" v-model="thirdQuarter.contrib" class="input">
+                            </td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqContrib" v-model="thirdQuarter.contrib" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4 квартал</td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqIncome" v-model="fourthQuarter.income" class="input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4 квартал</td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqIncome" v-model="fourthQuarter.income" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="field">
-                                <div class="control">
-                                    <input type="number" min="0" id="fqContrib" v-model="fourthQuarter.contrib" class="input">
+                            </td>
+                            <td>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="number" min="0" id="fqContrib" v-model="fourthQuarter.contrib" class="input">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!-- Расчёт -->
         <div class="column is-full">
-            <table class="table is-bordered is-striped is-hoverable">
-                <thead>
-                    <tr>
-                        <th colspan="5">Расчёт</th>
-                    </tr>
-                    <tr>
-                        <th>Период</th>
-                        <th>Доходы, руб.</th>
-                        <th>Взносы, руб.</th>
-                        <th>Налог, руб.</th>
-                        <th>К оплате, руб.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>3 месяца</td>
-                        <td>{{formatNumber(threeMonths.income)}}</td>
-                        <td>{{formatNumber(threeMonths.contrib)}}</td>
-                        <td>{{formatNumber(threeMonths.tax)}}</td>
-                        <td>{{formatNumber(threeMonths.payment)}}</td>
-                    </tr>
-                    <tr>
-                        <td>6 месяцев</td>
-                        <td>{{formatNumber(sixMonths.income)}}</td>
-                        <td>{{formatNumber(sixMonths.contrib)}}</td>
-                        <td>{{formatNumber(sixMonths.tax)}}</td>
-                        <td>{{formatNumber(sixMonths.payment)}}</td>
-                    </tr>
-                    <tr>
-                        <td>9 месяцев</td>
-                        <td>{{formatNumber(nineMonths.income)}}</td>
-                        <td>{{formatNumber(nineMonths.contrib)}}</td>
-                        <td>{{formatNumber(nineMonths.tax)}}</td>
-                        <td>{{formatNumber(nineMonths.payment)}}</td>
-                    </tr>
-                    <tr>
-                        <td>Год</td>
-                        <td>{{formatNumber(year.income)}}</td>
-                        <td>{{formatNumber(year.contrib)}}</td>
-                        <td>{{formatNumber(year.tax)}}</td>
-                        <td>{{formatNumber(year.payment)}}</td>
-                    </tr>
-                    <tr>
-                        <th colspan="3">Доход свыше 300 тыс. руб.</th>
-                        <td colspan="2">{{formatNumber(incomeAbove)}}</td>
-                    </tr>
-                    <tr>
-                        <th colspan="3">1% с дохода свыше 300 тыс. руб.</th>
-                        <td colspan="2">{{formatNumber(onePercentAbove)}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table class="table is-bordered is-striped is-hoverable">
+                    <thead>
+                        <tr>
+                            <th colspan="5">Расчёт</th>
+                        </tr>
+                        <tr>
+                            <th>Период</th>
+                            <th>Доходы, руб.</th>
+                            <th>Взносы, руб.</th>
+                            <th>Налог, руб.</th>
+                            <th>К оплате, руб.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3 месяца</td>
+                            <td>{{formatNumber(threeMonths.income)}}</td>
+                            <td>{{formatNumber(threeMonths.contrib)}}</td>
+                            <td>{{formatNumber(threeMonths.tax)}}</td>
+                            <td>{{formatNumber(threeMonths.payment)}}</td>
+                        </tr>
+                        <tr>
+                            <td>6 месяцев</td>
+                            <td>{{formatNumber(sixMonths.income)}}</td>
+                            <td>{{formatNumber(sixMonths.contrib)}}</td>
+                            <td>{{formatNumber(sixMonths.tax)}}</td>
+                            <td>{{formatNumber(sixMonths.payment)}}</td>
+                        </tr>
+                        <tr>
+                            <td>9 месяцев</td>
+                            <td>{{formatNumber(nineMonths.income)}}</td>
+                            <td>{{formatNumber(nineMonths.contrib)}}</td>
+                            <td>{{formatNumber(nineMonths.tax)}}</td>
+                            <td>{{formatNumber(nineMonths.payment)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Год</td>
+                            <td>{{formatNumber(year.income)}}</td>
+                            <td>{{formatNumber(year.contrib)}}</td>
+                            <td>{{formatNumber(year.tax)}}</td>
+                            <td>{{formatNumber(year.payment)}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Доход свыше 300 тыс. руб.</th>
+                            <td colspan="2">{{formatNumber(incomeAbove)}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">1% с дохода свыше 300 тыс. руб.</th>
+                            <td colspan="2">{{formatNumber(onePercentAbove)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="column is-full">
+            <hr>
+            <span style="display: block;">
+                Все введённые данные сохраняются только в вашем браузере.
+            </span>
+            <span>
+                &copy; {{(new Date).getFullYear()}}
+                <a href="https://zkelo.ru" target="_blank">ZKelo</a>
+            </span>
         </div>
     </div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js' integrity='sha512-Wbf9QOX8TxnLykSrNGmAc5mDntbpyXjOw9zgnKql3DgQ7Iyr5TCSPWpvpwDuo+jikYoSNMD9tRRH854VfPpL9A==' crossorigin='anonymous'></script>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js' integrity='sha512-Wbf9QOX8TxnLykSrNGmAc5mDntbpyXjOw9zgnKql3DgQ7Iyr5TCSPWpvpwDuo+jikYoSNMD9tRRH854VfPpL9A==' crossorigin='anonymous'></script> -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.runtime.global.prod.min.js' integrity='sha512-NCGoqM3yY5Han3juxGpgA0puuxGORZe4nSZQqyjhcAh8T59eIE0AzdOPy+jp07mb3zhLRXHgrO5+uYn8x8kuNw==' crossorigin='anonymous'></script>
     <script src="./calc.js"></script>
 </body>
 </html>
