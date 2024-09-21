@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор ИП</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css' integrity='sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==' crossorigin='anonymous'/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css'
+        integrity='sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=='
+        crossorigin='anonymous' />
 </head>
+
 <body>
     <div class="columns is-multiline ml-1 mt-1" id="calc">
         <div class="column is-full">
@@ -58,14 +62,16 @@
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqIncome" v-model="firstQuarter.income" class="input">
+                                        <input type="number" min="0" id="fqIncome" v-model="firstQuarter.income"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqContrib" v-model="firstQuarter.contrib" class="input">
+                                        <input type="number" min="0" id="fqContrib" v-model="firstQuarter.contrib"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
@@ -75,14 +81,16 @@
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqIncome" v-model="secondQuarter.income" class="input">
+                                        <input type="number" min="0" id="fqIncome" v-model="secondQuarter.income"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqContrib" v-model="secondQuarter.contrib" class="input">
+                                        <input type="number" min="0" id="fqContrib" v-model="secondQuarter.contrib"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
@@ -92,14 +100,16 @@
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqIncome" v-model="thirdQuarter.income" class="input">
+                                        <input type="number" min="0" id="fqIncome" v-model="thirdQuarter.income"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqContrib" v-model="thirdQuarter.contrib" class="input">
+                                        <input type="number" min="0" id="fqContrib" v-model="thirdQuarter.contrib"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
@@ -109,14 +119,16 @@
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqIncome" v-model="fourthQuarter.income" class="input">
+                                        <input type="number" min="0" id="fqIncome" v-model="fourthQuarter.income"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="field">
                                     <div class="control">
-                                        <input type="number" min="0" id="fqContrib" v-model="fourthQuarter.contrib" class="input">
+                                        <input type="number" min="0" id="fqContrib" v-model="fourthQuarter.contrib"
+                                            class="input">
                                     </div>
                                 </div>
                             </td>
@@ -138,7 +150,7 @@
                             <th>Доходы, руб.</th>
                             <th>Взносы, руб.</th>
                             <th>Налог, руб.</th>
-                            <th>К оплате, руб.</th>
+                            <th>Аванс, руб.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -194,7 +206,10 @@
         </div>
     </div>
     <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js' integrity='sha512-Wbf9QOX8TxnLykSrNGmAc5mDntbpyXjOw9zgnKql3DgQ7Iyr5TCSPWpvpwDuo+jikYoSNMD9tRRH854VfPpL9A==' crossorigin='anonymous'></script> -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.prod.min.js' integrity='sha512-39BSQXI5q1XlvVhLfFRidKG8KM6Tr6VS/XSnNo6N/A0ZXexHCeoUI/s+ulujQy3UREjoLNrMnFat8VI0mMugWA==' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.prod.min.js'
+        integrity='sha512-39BSQXI5q1XlvVhLfFRidKG8KM6Tr6VS/XSnNo6N/A0ZXexHCeoUI/s+ulujQy3UREjoLNrMnFat8VI0mMugWA=='
+        crossorigin='anonymous'></script>
     <script src="./calc.js"></script>
 </body>
+
 </html>
