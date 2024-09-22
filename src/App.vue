@@ -6,13 +6,57 @@ import CalcRow from './components/CalcRow.vue'
 import ResultRow from './components/ResultRow.vue'
 import Quarter from './enums/Quarter'
 import Column from './enums/Column'
-import BillPeriod from './enums/BillPeriod'
+import Period from './enums/BillPeriod'
+import type QuarterData from './interfaces/QuarterData'
+import type PeriodData from './interfaces/PeriodData'
 
 const rate: Ref = ref<Number>(6)
 const contribs: Ref = ref<Number>(49500)
 
-const dataColumns: Array<Column> = [Column.Period, Column.Income, Column.Contribs]
-const resultColumns: Array<Column> = [...dataColumns, Column.Tax, Column.Prepayment, Column.Payment]
+const dataColumns: Column[] = [Column.Period, Column.Income, Column.Contribs]
+const resultColumns: Column[] = [...dataColumns, Column.Tax, Column.Prepayment, Column.Payment]
+
+const quarters: QuarterData[] = [
+  { quarter: Quarter.First, income: ref<Number>(0), contribs: ref<Number>(0) },
+  { quarter: Quarter.Second, income: ref<Number>(0), contribs: ref<Number>(0) },
+  { quarter: Quarter.Third, income: ref<Number>(0), contribs: ref<Number>(0) },
+  { quarter: Quarter.Fourth, income: ref<Number>(0), contribs: ref<Number>(0) }
+]
+
+const periods: PeriodData[] = [
+  {
+    period: Period.ThreeMonths,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  },
+  {
+    period: Period.HalfYear,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  },
+  {
+    period: Period.NineMonths,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  },
+  {
+    period: Period.Year,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  }
+]
 </script>
 
 <template>
@@ -37,26 +81,26 @@ const resultColumns: Array<Column> = [...dataColumns, Column.Tax, Column.Prepaym
     <div class="column is-full">
       <h2 class="title is-2">Данные</h2>
       <Table :columns="dataColumns">
-        <CalcRow :quarter="Quarter.First"></CalcRow>
-        <CalcRow :quarter="Quarter.Second"></CalcRow>
-        <CalcRow :quarter="Quarter.Third"></CalcRow>
-        <CalcRow :quarter="Quarter.Fourth"></CalcRow>
+        <CalcRow
+          v-for="(item, key) in quarters"
+          :key="key"
+          :quarter="item.quarter"
+          v-model:income="item.income"
+          v-model:contribs="item.contribs"
+        ></CalcRow>
       </Table>
     </div>
     <div class="column is-full">
       <h2 class="title is-2">Результат</h2>
       <Table :columns="resultColumns">
-        <ResultRow :period="BillPeriod.ThreeMonths"></ResultRow>
-        <ResultRow :period="BillPeriod.HalfYear"></ResultRow>
-        <ResultRow :period="BillPeriod.NineMonths"></ResultRow>
-        <ResultRow :period="BillPeriod.Year"></ResultRow>
+        <ResultRow v-for="(item, key) in periods" :key="key" :data="item"></ResultRow>
         <tr>
-          <td colspan="4"><strong>Доход свыше 300 тыс. руб.</strong></td>
-          <td colspan="2"></td>
+          <td colspan="5"><strong>Доход свыше 300 тыс. руб.</strong></td>
+          <td colspan="1"></td>
         </tr>
         <tr>
-          <td colspan="4"><strong>1% от дохода свыше 300 тыс. руб.</strong></td>
-          <td colspan="2"></td>
+          <td colspan="5"><strong>1% от дохода свыше 300 тыс. руб.</strong></td>
+          <td colspan="1"></td>
         </tr>
       </Table>
     </div>
