@@ -92,7 +92,7 @@ const Calc = {
             };
 
             if (data.contrib < data.tax) {
-                data.payment = data.tax - data.contrib;
+                data.payment = data.tax - data.contrib - this.threeMonths.payment;
             }
             return data;
         },
@@ -106,7 +106,7 @@ const Calc = {
             };
 
             if (data.contrib < data.tax) {
-                data.payment = data.tax - data.contrib;
+                data.payment = data.tax - data.contrib - this.sixMonths.payment;
             }
             return data;
         },
@@ -120,7 +120,7 @@ const Calc = {
             };
 
             if (data.contrib < data.tax) {
-                data.payment = data.tax - data.contrib;
+                data.payment = data.tax - data.contrib - this.nineMonths.payment;
             }
             return data;
         },
