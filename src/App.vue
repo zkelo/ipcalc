@@ -16,47 +16,23 @@ const contribs: Ref = ref<Number>(49500)
 const dataColumns: Column[] = [Column.Period, Column.Income, Column.Contribs]
 const resultColumns: Column[] = [...dataColumns, Column.Tax, Column.Prepayment, Column.Payment]
 
-const quarters: QuarterData[] = [
-  { quarter: Quarter.First, income: ref<Number>(0), contribs: ref<Number>(0) },
-  { quarter: Quarter.Second, income: ref<Number>(0), contribs: ref<Number>(0) },
-  { quarter: Quarter.Third, income: ref<Number>(0), contribs: ref<Number>(0) },
-  { quarter: Quarter.Fourth, income: ref<Number>(0), contribs: ref<Number>(0) }
-]
+const quarters: QuarterData[] = [Quarter.First, Quarter.Second, Quarter.Third, Quarter.Fourth].map(
+  (quarter: Quarter) => ({ quarter, income: ref<Number>(0), contribs: ref<Number>(0) })
+)
 
 const periods: PeriodData[] = [
-  {
-    period: Period.ThreeMonths,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
-  },
-  {
-    period: Period.HalfYear,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
-  },
-  {
-    period: Period.NineMonths,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
-  },
-  {
-    period: Period.Year,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
-  }
-]
+  Period.ThreeMonths,
+  Period.HalfYear,
+  Period.NineMonths,
+  Period.Year
+].map((period: Period) => ({
+  period,
+  income: ref<Number>(0),
+  tax: ref<Number>(0),
+  contribs: ref<Number>(0),
+  prepayment: ref<Number>(0),
+  payment: ref<Number>(0)
+}))
 </script>
 
 <template>
