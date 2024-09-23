@@ -6,7 +6,7 @@ import CalcRow from './components/CalcRow.vue'
 import ResultRow from './components/ResultRow.vue'
 import Quarter from './enums/Quarter'
 import Column from './enums/Column'
-import Period from './enums/BillPeriod'
+import Period from './enums/Period'
 import type QuarterData from './interfaces/QuarterData'
 import type PeriodData from './interfaces/PeriodData'
 
@@ -61,8 +61,8 @@ const periods: PeriodData[] = [
           v-for="(item, key) in quarters"
           :key="key"
           :quarter="item.quarter"
-          v-model:income="item.income"
-          v-model:contribs="item.contribs"
+          v-model:income="item.income.value"
+          v-model:contribs="item.contribs.value"
         ></CalcRow>
       </Table>
     </div>
