@@ -70,15 +70,14 @@ function calcTax(period: Period): number {
 function calcPrepayment(period: Period): number {
   let prevPrepayment: number = 0
   for (const key in Period) {
-    if (key === period) {
+    const name = Period[key as keyof typeof Period]
+    if (name === period) {
       break
     }
 
-    const name = Period[key as keyof typeof Period]
-    prevPrepayment += prepayment[name].value || 0
+    prevPrepayment += prepayment[name].value
   }
 
-  // FIXME `prevPayment` считается неправильно
   const result: number = tax[period].value - contribs[period].value - prevPrepayment
   return result
 }
