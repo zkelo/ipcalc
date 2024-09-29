@@ -81,7 +81,7 @@ function distrib() {
     </div>
     <div class="column is-full">
       <h2 class="title is-2">Результат</h2>
-      <ResultTable :periods></ResultTable>
+      <ResultTable :quarters :periods></ResultTable>
     </div>
     <div class="column is-full">
       <hr />
