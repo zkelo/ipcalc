@@ -25,19 +25,26 @@ const overincome: Ref<number> = ref<number>(0)
 const overincomePercent: Ref<number> = ref<number>(0)
 
 const income: { [key in Period]: ComputedRef<number> } = {
-  [Period.ThreeMonths]: computed((): number => periodsIncome(Period.ThreeMonths)),
-  [Period.HalfYear]: computed((): number => periodsIncome(Period.HalfYear)),
-  [Period.NineMonths]: computed((): number => periodsIncome(Period.NineMonths)),
-  [Period.Year]: computed((): number => periodsIncome(Period.Year))
+  [Period.ThreeMonths]: computed((): number => calcPeriodProp('income', Period.ThreeMonths)),
+  [Period.HalfYear]: computed((): number => calcPeriodProp('income', Period.HalfYear)),
+  [Period.NineMonths]: computed((): number => calcPeriodProp('income', Period.NineMonths)),
+  [Period.Year]: computed((): number => calcPeriodProp('income', Period.Year))
 }
 
-function periodsIncome(...periods: Period[]): number {
-  let income: number = 0
+const contribs: { [key in Period]: ComputedRef<number> } = {
+  [Period.ThreeMonths]: computed((): number => calcPeriodProp('contribs', Period.ThreeMonths)),
+  [Period.HalfYear]: computed((): number => calcPeriodProp('contribs', Period.HalfYear)),
+  [Period.NineMonths]: computed((): number => calcPeriodProp('contribs', Period.NineMonths)),
+  [Period.Year]: computed((): number => calcPeriodProp('contribs', Period.Year))
+}
+
+function calcPeriodProp(prop: 'income' | 'contribs', ...periods: Period[]): number {
+  let result: number = 0
   periods.forEach((period: Period): void => {
-    const quarters = props.periods[period].quarters
-    quarters.forEach((quarter: Quarter): number => (income += props.quarters[quarter].income.value))
+    const quarters: Quarter[] = props.periods[period].quarters
+    quarters.forEach((quarter: Quarter): number => (result += props.quarters[quarter][prop].value))
   })
-  return income
+  return result
 }
 </script>
 
@@ -46,7 +53,7 @@ function periodsIncome(...periods: Period[]): number {
     <tr v-for="(item, period) in props.periods" :key="period">
       <td>{{ item.period }}</td>
       <td>{{ income[item.period] }}</td>
-      <td>{{ item.contribs }}</td>
+      <td>{{ contribs[item.period] }}</td>
       <td>{{ item.tax }}</td>
       <td>{{ item.prepayment }}</td>
       <td>{{ item.payment }}</td>
