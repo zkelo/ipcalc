@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
-  columns: Array<String>
-}>()
+import type Column from '@/enums/Column'
+
+const props = defineProps<{ columns: Column[] }>()
 </script>
 
 <template>

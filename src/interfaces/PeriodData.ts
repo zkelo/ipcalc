@@ -1,4 +1,4 @@
-import type Period from '@/enums/BillPeriod'
+import type Period from '@/enums/Period'
 import type { Ref } from 'vue'
 
 export default interface PeriodData {

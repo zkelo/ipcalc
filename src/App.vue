@@ -1,38 +1,59 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
-import Table from './components/Table.vue'
 import Field from './components/Field.vue'
-import CalcRow from './components/CalcRow.vue'
-import ResultRow from './components/ResultRow.vue'
-import Quarter from './enums/Quarter'
-import Column from './enums/Column'
-import Period from './enums/Period'
+import CalcTable from './components/CalcTable.vue'
+import ResultTable from './components/ResultTable.vue'
 import type QuarterData from './interfaces/QuarterData'
+import Quarter from './enums/Quarter'
+import Period from './enums/Period'
 import type PeriodData from './interfaces/PeriodData'
 
-const rate: Ref = ref<Number>(6)
-const contribs: Ref = ref<Number>(49500)
-
-const dataColumns: Column[] = [Column.Period, Column.Income, Column.Contribs]
-const resultColumns: Column[] = [...dataColumns, Column.Tax, Column.Prepayment, Column.Payment]
+const rate: Ref<Number> = ref<Number>(6)
+const yearContribs: Ref<Number> = ref<Number>(49500)
 
 const quarters: QuarterData[] = [Quarter.First, Quarter.Second, Quarter.Third, Quarter.Fourth].map(
   (quarter: Quarter) => ({ quarter, income: ref<Number>(0), contribs: ref<Number>(0) })
 )
 
-const periods: PeriodData[] = [
-  Period.ThreeMonths,
-  Period.HalfYear,
-  Period.NineMonths,
-  Period.Year
-].map((period: Period) => ({
-  period,
-  income: ref<Number>(0),
-  tax: ref<Number>(0),
-  contribs: ref<Number>(0),
-  prepayment: ref<Number>(0),
-  payment: ref<Number>(0)
-}))
+const periods: { [key in Period]: PeriodData } = {
+  [Period.ThreeMonths]: {
+    period: Period.ThreeMonths,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  },
+  [Period.HalfYear]: {
+    period: Period.HalfYear,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  },
+  [Period.NineMonths]: {
+    period: Period.NineMonths,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  },
+  [Period.Year]: {
+    period: Period.Year,
+    income: ref<Number>(0),
+    tax: ref<Number>(0),
+    contribs: ref<Number>(0),
+    prepayment: ref<Number>(0),
+    payment: ref<Number>(0)
+  }
+}
+
+function distrib() {
+  const contrib: Number = +yearContribs.value / 4
+  quarters.forEach((quarter) => (quarter.contribs.value = contrib))
+}
 </script>
 
 <template>
@@ -47,38 +68,20 @@ const periods: PeriodData[] = [
       <Field label="Налоговая ставка, %" v-model="rate"></Field>
     </div>
     <div class="column is-one-fifth">
-      <Field label="Годовые взносы, руб." v-model="contribs"></Field>
+      <Field label="Годовые взносы, руб." v-model="yearContribs"></Field>
       <div class="field mt-2">
         <div class="control">
-          <button class="button">Распределить взносы</button>
+          <button class="button" @click="distrib">Распределить взносы</button>
         </div>
       </div>
     </div>
     <div class="column is-full">
       <h2 class="title is-2">Данные</h2>
-      <Table :columns="dataColumns">
-        <CalcRow
-          v-for="(item, key) in quarters"
-          :key="key"
-          :quarter="item.quarter"
-          v-model:income="item.income.value"
-          v-model:contribs="item.contribs.value"
-        ></CalcRow>
-      </Table>
+      <CalcTable :quarters></CalcTable>
     </div>
     <div class="column is-full">
       <h2 class="title is-2">Результат</h2>
-      <Table :columns="resultColumns">
-        <ResultRow v-for="(item, key) in periods" :key="key" :data="item"></ResultRow>
-        <tr>
-          <td colspan="5"><strong>Доход свыше 300 тыс. руб.</strong></td>
-          <td colspan="1"></td>
-        </tr>
-        <tr>
-          <td colspan="5"><strong>1% от дохода свыше 300 тыс. руб.</strong></td>
-          <td colspan="1"></td>
-        </tr>
-      </Table>
+      <ResultTable :periods></ResultTable>
     </div>
     <div class="column is-full">
       <hr />
