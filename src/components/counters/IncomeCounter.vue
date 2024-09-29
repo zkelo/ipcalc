@@ -5,8 +5,8 @@ import { computed } from 'vue'
 const props = defineProps<{ periods: PeriodData[] }>()
 
 const income = computed(() => {
-  let sum: Number = 0
-  props.periods.forEach((period) => (sum = sum.valueOf() + period.income.value.valueOf()))
+  let sum: number = 0
+  props.periods.forEach((period) => (sum += period.income.value))
   return sum
 })
 </script>

@@ -5,9 +5,10 @@ import type PeriodData from '@/interfaces/PeriodData'
 import Period from '@/enums/Period'
 import type QuarterData from '@/interfaces/QuarterData'
 import { computed, ref, type ComputedRef, type Ref } from 'vue'
+import Quarter from '@/enums/Quarter'
 
 const props = defineProps<{
-  quarters: QuarterData[]
+  quarters: { [key in Quarter]: QuarterData }
   periods: { [key in Period]: PeriodData }
 }>()
 
@@ -20,14 +21,23 @@ const columns: Column[] = [
   Column.Payment
 ]
 
-const overincome: Ref<Number> = ref<Number>(0)
-const overincomePercent: Ref<Number> = ref<Number>(0)
+const overincome: Ref<number> = ref<number>(0)
+const overincomePercent: Ref<number> = ref<number>(0)
 
-const income: { [key in Period]: ComputedRef<Ref<Number>> } = {
-  [Period.ThreeMonths]: computed((): Ref<Number> => props.periods[Period.ThreeMonths].income),
-  [Period.HalfYear]: computed((): Ref<Number> => props.periods[Period.HalfYear].income),
-  [Period.NineMonths]: computed((): Ref<Number> => props.periods[Period.NineMonths].income),
-  [Period.Year]: computed((): Ref<Number> => props.periods[Period.Year].income)
+const income: { [key in Period]: ComputedRef<number> } = {
+  [Period.ThreeMonths]: computed((): number => periodsIncome(Period.ThreeMonths)),
+  [Period.HalfYear]: computed((): number => periodsIncome(Period.HalfYear)),
+  [Period.NineMonths]: computed((): number => periodsIncome(Period.NineMonths)),
+  [Period.Year]: computed((): number => periodsIncome(Period.Year))
+}
+
+function periodsIncome(...periods: Period[]): number {
+  let income: number = 0
+  periods.forEach((period: Period): void => {
+    const quarters = props.periods[period].quarters
+    quarters.forEach((quarter: Quarter): number => (income += props.quarters[quarter].income.value))
+  })
+  return income
 }
 </script>
 

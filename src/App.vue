@@ -8,51 +8,75 @@ import Quarter from './enums/Quarter'
 import Period from './enums/Period'
 import type PeriodData from './interfaces/PeriodData'
 
-const rate: Ref<Number> = ref<Number>(6)
-const yearContribs: Ref<Number> = ref<Number>(49500)
+const rate: Ref<number> = ref<number>(6)
+const yearContribs: Ref<number> = ref<number>(49500)
 
-const quarters: QuarterData[] = [Quarter.First, Quarter.Second, Quarter.Third, Quarter.Fourth].map(
-  (quarter: Quarter) => ({ quarter, income: ref<Number>(0), contribs: ref<Number>(0) })
-)
+const quarters: { [key in Quarter]: QuarterData } = {
+  [Quarter.First]: {
+    quarter: Quarter.First,
+    income: ref<number>(0),
+    contribs: ref<number>(0)
+  },
+  [Quarter.Second]: {
+    quarter: Quarter.Second,
+    income: ref<number>(0),
+    contribs: ref<number>(0)
+  },
+  [Quarter.Third]: {
+    quarter: Quarter.Third,
+    income: ref<number>(0),
+    contribs: ref<number>(0)
+  },
+  [Quarter.Fourth]: {
+    quarter: Quarter.Fourth,
+    income: ref<number>(0),
+    contribs: ref<number>(0)
+  }
+}
 
 const periods: { [key in Period]: PeriodData } = {
   [Period.ThreeMonths]: {
     period: Period.ThreeMonths,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
+    quarters: [Quarter.First],
+    income: ref<number>(0),
+    tax: ref<number>(0),
+    contribs: ref<number>(0),
+    prepayment: ref<number>(0),
+    payment: ref<number>(0)
   },
   [Period.HalfYear]: {
     period: Period.HalfYear,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
+    quarters: [Quarter.First, Quarter.Second],
+    income: ref<number>(0),
+    tax: ref<number>(0),
+    contribs: ref<number>(0),
+    prepayment: ref<number>(0),
+    payment: ref<number>(0)
   },
   [Period.NineMonths]: {
     period: Period.NineMonths,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
+    quarters: [Quarter.First, Quarter.Second, Quarter.Third],
+    income: ref<number>(0),
+    tax: ref<number>(0),
+    contribs: ref<number>(0),
+    prepayment: ref<number>(0),
+    payment: ref<number>(0)
   },
   [Period.Year]: {
     period: Period.Year,
-    income: ref<Number>(0),
-    tax: ref<Number>(0),
-    contribs: ref<Number>(0),
-    prepayment: ref<Number>(0),
-    payment: ref<Number>(0)
+    quarters: [Quarter.First, Quarter.Second, Quarter.Third, Quarter.Fourth],
+    income: ref<number>(0),
+    tax: ref<number>(0),
+    contribs: ref<number>(0),
+    prepayment: ref<number>(0),
+    payment: ref<number>(0)
   }
 }
 
 function distrib() {
-  const contrib: Number = +yearContribs.value / 4
-  quarters.forEach((quarter) => (quarter.contribs.value = contrib))
+  const contrib: number = +yearContribs.value / 4
+  const list: QuarterData[] = Object.values(quarters)
+  list.forEach((quarter: QuarterData): number => (quarter.contribs.value = contrib))
 }
 </script>
 

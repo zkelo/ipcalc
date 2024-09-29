@@ -1,11 +1,13 @@
 import type Period from '@/enums/Period'
+import type Quarter from '@/enums/Quarter'
 import type { Ref } from 'vue'
 
 export default interface PeriodData {
   period: Period
-  income: Ref<Number>
-  contribs: Ref<Number>
-  tax: Ref<Number>
-  prepayment: Ref<Number>
-  payment: Ref<Number>
+  quarters: [Quarter, ...Quarter[]]
+  income: Ref<number>
+  contribs: Ref<number>
+  tax: Ref<number>
+  prepayment: Ref<number>
+  payment: Ref<number>
 }
