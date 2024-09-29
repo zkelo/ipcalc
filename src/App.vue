@@ -14,23 +14,23 @@ const yearContribs: Ref<number> = ref<number>(49500)
 const quarters: { [key in Quarter]: QuarterData } = {
   [Quarter.First]: {
     quarter: Quarter.First,
-    income: ref<number>(0),
-    contribs: ref<number>(0)
+    income: ref<number>(344_000),
+    contribs: ref<number>(12_375)
   },
   [Quarter.Second]: {
     quarter: Quarter.Second,
-    income: ref<number>(0),
-    contribs: ref<number>(0)
+    income: ref<number>(466_000),
+    contribs: ref<number>(12_375)
   },
   [Quarter.Third]: {
     quarter: Quarter.Third,
-    income: ref<number>(0),
-    contribs: ref<number>(0)
+    income: ref<number>(588_700),
+    contribs: ref<number>(12_375)
   },
   [Quarter.Fourth]: {
     quarter: Quarter.Fourth,
-    income: ref<number>(0),
-    contribs: ref<number>(0)
+    income: ref<number>(602_500),
+    contribs: ref<number>(12_375)
   }
 }
 
