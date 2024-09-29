@@ -79,7 +79,7 @@ function calcPrepayment(period: Period): number {
   }
 
   const result: number = tax[period].value - contribs[period].value - prevPrepayment
-  return result
+  return result < 0 ? 0 : result
 }
 </script>
 
