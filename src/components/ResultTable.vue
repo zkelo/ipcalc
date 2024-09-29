@@ -16,6 +16,8 @@ const props = defineProps<{
   rate: number
 }>()
 
+const formatter = Intl.NumberFormat()
+
 const columns: Column[] = [
   Column.Period,
   Column.Income,
@@ -89,24 +91,28 @@ function calcPrepayment(period: Period): number {
   const result: number = tax[period].value - contribs[period].value - prevPrepayment
   return result < 0 ? 0 : result
 }
+
+function formatNumber(number: number): string {
+  return formatter.format(number)
+}
 </script>
 
 <template>
   <Table :columns="columns">
     <tr v-for="(item, period) in props.periods" :key="period">
       <td>{{ item.period }}</td>
-      <td>{{ income[item.period] }}</td>
-      <td>{{ contribs[item.period] }}</td>
-      <td>{{ tax[item.period] }}</td>
-      <td>{{ prepayment[item.period] }}</td>
+      <td>{{ formatNumber(income[item.period].value) }}</td>
+      <td>{{ formatNumber(contribs[item.period].value) }}</td>
+      <td>{{ formatNumber(tax[item.period].value) }}</td>
+      <td>{{ formatNumber(prepayment[item.period].value) }}</td>
     </tr>
     <tr>
       <td colspan="4"><strong>Доход свыше 300 тыс. руб.</strong></td>
-      <td colspan="1">{{ overincome }}</td>
+      <td colspan="1">{{ formatNumber(overincome) }}</td>
     </tr>
     <tr>
       <td colspan="4"><strong>1% от дохода свыше 300 тыс. руб.</strong></td>
-      <td colspan="1">{{ overincomePercent }}</td>
+      <td colspan="1">{{ formatNumber(overincomePercent) }}</td>
     </tr>
   </Table>
 </template>
