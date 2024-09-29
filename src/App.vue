@@ -37,35 +37,19 @@ const quarters: { [key in Quarter]: QuarterData } = {
 const periods: { [key in Period]: PeriodData } = {
   [Period.ThreeMonths]: {
     period: Period.ThreeMonths,
-    quarters: [Quarter.First],
-    income: ref<number>(0),
-    tax: ref<number>(0),
-    contribs: ref<number>(0),
-    prepayment: ref<number>(0)
+    quarters: [Quarter.First]
   },
   [Period.HalfYear]: {
     period: Period.HalfYear,
-    quarters: [Quarter.First, Quarter.Second],
-    income: ref<number>(0),
-    tax: ref<number>(0),
-    contribs: ref<number>(0),
-    prepayment: ref<number>(0)
+    quarters: [Quarter.First, Quarter.Second]
   },
   [Period.NineMonths]: {
     period: Period.NineMonths,
-    quarters: [Quarter.First, Quarter.Second, Quarter.Third],
-    income: ref<number>(0),
-    tax: ref<number>(0),
-    contribs: ref<number>(0),
-    prepayment: ref<number>(0)
+    quarters: [Quarter.First, Quarter.Second, Quarter.Third]
   },
   [Period.Year]: {
     period: Period.Year,
-    quarters: [Quarter.First, Quarter.Second, Quarter.Third, Quarter.Fourth],
-    income: ref<number>(0),
-    tax: ref<number>(0),
-    contribs: ref<number>(0),
-    prepayment: ref<number>(0)
+    quarters: [Quarter.First, Quarter.Second, Quarter.Third, Quarter.Fourth]
   }
 }
 
@@ -101,7 +85,7 @@ function distrib() {
     </div>
     <div class="column is-full">
       <h2 class="title is-2">Результат</h2>
-      <ResultTable :quarters :periods></ResultTable>
+      <ResultTable :quarters :periods :rate></ResultTable>
     </div>
     <div class="column is-full">
       <hr />

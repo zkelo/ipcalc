@@ -7,7 +7,7 @@ const value = defineModel()
   <div class="field">
     <label v-if="props.label" class="label">{{ props.label }}</label>
     <div class="control">
-      <input type="number" class="input" v-model="value" min="0" />
+      <input type="number" class="input" v-model.number="value" min="0" />
     </div>
   </div>
 </template>

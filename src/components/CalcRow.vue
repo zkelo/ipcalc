@@ -11,7 +11,7 @@ const contribs = defineModel('contribs')
 <template>
   <tr>
     <td>{{ props.quarter }} квартал</td>
-    <td><Field v-model="income"></Field></td>
-    <td><Field v-model="contribs"></Field></td>
+    <td><Field v-model.number="income"></Field></td>
+    <td><Field v-model.number="contribs"></Field></td>
   </tr>
 </template>

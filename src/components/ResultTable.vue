@@ -10,6 +10,7 @@ import Quarter from '@/enums/Quarter'
 const props = defineProps<{
   quarters: { [key in Quarter]: QuarterData }
   periods: { [key in Period]: PeriodData }
+  rate: number
 }>()
 
 const columns: Column[] = [
@@ -37,12 +38,48 @@ const contribs: { [key in Period]: ComputedRef<number> } = {
   [Period.Year]: computed((): number => calcPeriodProp('contribs', Period.Year))
 }
 
+const tax: { [key in Period]: ComputedRef<number> } = {
+  [Period.ThreeMonths]: computed((): number => calcTax(Period.ThreeMonths)),
+  [Period.HalfYear]: computed((): number => calcTax(Period.HalfYear)),
+  [Period.NineMonths]: computed((): number => calcTax(Period.NineMonths)),
+  [Period.Year]: computed((): number => calcTax(Period.Year))
+}
+
+const prepayment: { [key in Period]: ComputedRef<number> } = {
+  [Period.ThreeMonths]: computed((): number => calcPrepayment(Period.ThreeMonths)),
+  [Period.HalfYear]: computed((): number => calcPrepayment(Period.HalfYear)),
+  [Period.NineMonths]: computed((): number => calcPrepayment(Period.NineMonths)),
+  [Period.Year]: computed((): number => calcPrepayment(Period.Year))
+}
+
 function calcPeriodProp(prop: 'income' | 'contribs', period: Period): number {
   let result: number = 0
 
   const quarters: Quarter[] = props.periods[period].quarters
   quarters.forEach((quarter: Quarter): number => (result += props.quarters[quarter][prop].value))
 
+  return result
+}
+
+function calcTax(period: Period): number {
+  const rate: number = +props.rate / 100
+  const tax: number = income[period].value * rate
+  return tax
+}
+
+function calcPrepayment(period: Period): number {
+  let prevPrepayment: number = 0
+  for (const key in Period) {
+    if (key === period) {
+      break
+    }
+
+    const name = Period[key as keyof typeof Period]
+    prevPrepayment += prepayment[name].value || 0
+  }
+
+  // FIXME `prevPayment` считается неправильно
+  const result: number = tax[period].value - contribs[period].value - prevPrepayment
   return result
 }
 </script>
@@ -53,15 +90,15 @@ function calcPeriodProp(prop: 'income' | 'contribs', period: Period): number {
       <td>{{ item.period }}</td>
       <td>{{ income[item.period] }}</td>
       <td>{{ contribs[item.period] }}</td>
-      <td>{{ item.tax }}</td>
-      <td>{{ item.prepayment }}</td>
+      <td>{{ tax[item.period] }}</td>
+      <td>{{ prepayment[item.period] }}</td>
     </tr>
     <tr>
-      <td colspan="5"><strong>Доход свыше 300 тыс. руб.</strong></td>
+      <td colspan="4"><strong>Доход свыше 300 тыс. руб.</strong></td>
       <td colspan="1">{{ overincome }}</td>
     </tr>
     <tr>
-      <td colspan="5"><strong>1% от дохода свыше 300 тыс. руб.</strong></td>
+      <td colspan="4"><strong>1% от дохода свыше 300 тыс. руб.</strong></td>
       <td colspan="1">{{ overincomePercent }}</td>
     </tr>
   </Table>
