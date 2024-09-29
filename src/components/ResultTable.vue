@@ -17,8 +17,7 @@ const columns: Column[] = [
   Column.Income,
   Column.Contribs,
   Column.Tax,
-  Column.Prepayment,
-  Column.Payment
+  Column.Prepayment
 ]
 
 const overincome: Ref<number> = ref<number>(0)
@@ -56,7 +55,6 @@ function calcPeriodProp(prop: 'income' | 'contribs', period: Period): number {
       <td>{{ contribs[item.period] }}</td>
       <td>{{ item.tax }}</td>
       <td>{{ item.prepayment }}</td>
-      <td>{{ item.payment }}</td>
     </tr>
     <tr>
       <td colspan="5"><strong>Доход свыше 300 тыс. руб.</strong></td>

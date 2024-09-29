@@ -3,8 +3,7 @@ enum Column {
   Income = 'Доход, руб.',
   Contribs = 'Взносы, руб.',
   Tax = 'Налог, руб.',
-  Prepayment = 'Аванс, руб.',
-  Payment = 'К оплате, руб.'
+  Prepayment = 'Аванс, руб.'
 }
 
 export default Column

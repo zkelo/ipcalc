@@ -9,5 +9,4 @@ export default interface PeriodData {
   contribs: Ref<number>
   tax: Ref<number>
   prepayment: Ref<number>
-  payment: Ref<number>
 }

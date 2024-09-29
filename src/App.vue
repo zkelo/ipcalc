@@ -41,8 +41,7 @@ const periods: { [key in Period]: PeriodData } = {
     income: ref<number>(0),
     tax: ref<number>(0),
     contribs: ref<number>(0),
-    prepayment: ref<number>(0),
-    payment: ref<number>(0)
+    prepayment: ref<number>(0)
   },
   [Period.HalfYear]: {
     period: Period.HalfYear,
@@ -50,8 +49,7 @@ const periods: { [key in Period]: PeriodData } = {
     income: ref<number>(0),
     tax: ref<number>(0),
     contribs: ref<number>(0),
-    prepayment: ref<number>(0),
-    payment: ref<number>(0)
+    prepayment: ref<number>(0)
   },
   [Period.NineMonths]: {
     period: Period.NineMonths,
@@ -59,8 +57,7 @@ const periods: { [key in Period]: PeriodData } = {
     income: ref<number>(0),
     tax: ref<number>(0),
     contribs: ref<number>(0),
-    prepayment: ref<number>(0),
-    payment: ref<number>(0)
+    prepayment: ref<number>(0)
   },
   [Period.Year]: {
     period: Period.Year,
@@ -68,8 +65,7 @@ const periods: { [key in Period]: PeriodData } = {
     income: ref<number>(0),
     tax: ref<number>(0),
     contribs: ref<number>(0),
-    prepayment: ref<number>(0),
-    payment: ref<number>(0)
+    prepayment: ref<number>(0)
   }
 }
 
