@@ -4,8 +4,11 @@ import Column from '@/enums/Column'
 import type PeriodData from '@/interfaces/PeriodData'
 import Period from '@/enums/Period'
 import type QuarterData from '@/interfaces/QuarterData'
-import { computed, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef } from 'vue'
 import Quarter from '@/enums/Quarter'
+
+const OVERINCOME_AMOUNT: number = 300_000
+const OVERINCOME_MULTIPLIER: number = 0.01
 
 const props = defineProps<{
   quarters: { [key in Quarter]: QuarterData }
@@ -20,9 +23,6 @@ const columns: Column[] = [
   Column.Tax,
   Column.Prepayment
 ]
-
-const overincome: Ref<number> = ref<number>(0)
-const overincomePercent: Ref<number> = ref<number>(0)
 
 const income: { [key in Period]: ComputedRef<number> } = {
   [Period.ThreeMonths]: computed((): number => calcPeriodProp('income', Period.ThreeMonths)),
@@ -51,6 +51,14 @@ const prepayment: { [key in Period]: ComputedRef<number> } = {
   [Period.NineMonths]: computed((): number => calcPrepayment(Period.NineMonths)),
   [Period.Year]: computed((): number => calcPrepayment(Period.Year))
 }
+
+const overincome: ComputedRef<number> = computed(
+  (): number => income[Period.Year].value - OVERINCOME_AMOUNT
+)
+
+const overincomePercent: ComputedRef<number> = computed(
+  (): number => overincome.value * OVERINCOME_MULTIPLIER
+)
 
 function calcPeriodProp(prop: 'income' | 'contribs', period: Period): number {
   let result: number = 0
