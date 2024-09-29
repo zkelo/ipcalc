@@ -38,12 +38,12 @@ const contribs: { [key in Period]: ComputedRef<number> } = {
   [Period.Year]: computed((): number => calcPeriodProp('contribs', Period.Year))
 }
 
-function calcPeriodProp(prop: 'income' | 'contribs', ...periods: Period[]): number {
+function calcPeriodProp(prop: 'income' | 'contribs', period: Period): number {
   let result: number = 0
-  periods.forEach((period: Period): void => {
-    const quarters: Quarter[] = props.periods[period].quarters
-    quarters.forEach((quarter: Quarter): number => (result += props.quarters[quarter][prop].value))
-  })
+
+  const quarters: Quarter[] = props.periods[period].quarters
+  quarters.forEach((quarter: Quarter): number => (result += props.quarters[quarter][prop].value))
+
   return result
 }
 </script>
