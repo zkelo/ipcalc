@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue'
+import { computed, ref, type ComputedRef, type Ref } from 'vue'
 import Field from './components/Field.vue'
 import CalcTable from './components/CalcTable.vue'
 import ResultTable from './components/ResultTable.vue'
 import type QuarterData from './interfaces/QuarterData'
 import Quarter from './enums/Quarter'
 import Period from './enums/Period'
-import type PeriodData from './interfaces/PeriodData'
+import type Quarters from './types/Quarters'
+import type Periods from './types/Periods'
 
 const rate: Ref<number> = ref<number>(6)
 const yearContribs: Ref<number> = ref<number>(49500)
 
-const quarters: { [key in Quarter]: QuarterData } = {
+const quarters: Quarters = {
   [Quarter.First]: {
     quarter: Quarter.First,
     income: ref<number>(344_000),
@@ -34,7 +35,7 @@ const quarters: { [key in Quarter]: QuarterData } = {
   }
 }
 
-const periods: { [key in Period]: PeriodData } = {
+const periods: Periods = {
   [Period.ThreeMonths]: {
     period: Period.ThreeMonths,
     quarters: [Quarter.First]
@@ -53,10 +54,13 @@ const periods: { [key in Period]: PeriodData } = {
   }
 }
 
-function distrib() {
+const quarterList: ComputedRef<QuarterData[]> = computed((): QuarterData[] =>
+  Object.values(quarters)
+)
+
+function distrib(): void {
   const contrib: number = +yearContribs.value / 4
-  const list: QuarterData[] = Object.values(quarters)
-  list.forEach((quarter: QuarterData): number => (quarter.contribs.value = contrib))
+  quarterList.value.forEach((quarter: QuarterData): number => (quarter.contribs.value = contrib))
 }
 </script>
 

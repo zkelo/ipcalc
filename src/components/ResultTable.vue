@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import Table from './Table.vue'
 import Column from '@/enums/Column'
-import type PeriodData from '@/interfaces/PeriodData'
 import Period from '@/enums/Period'
-import type QuarterData from '@/interfaces/QuarterData'
 import { computed, type ComputedRef } from 'vue'
 import Quarter from '@/enums/Quarter'
+import type Quarters from '@/types/Quarters'
+import type Periods from '@/types/Periods'
 
 const OVERINCOME_AMOUNT: number = 300_000
 const OVERINCOME_MULTIPLIER: number = 0.01
 
 const props = defineProps<{
-  quarters: { [key in Quarter]: QuarterData }
-  periods: { [key in Period]: PeriodData }
+  quarters: Quarters
+  periods: Periods
   rate: number
 }>()
 

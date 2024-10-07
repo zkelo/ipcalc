@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import type QuarterData from '@/interfaces/QuarterData'
 import Table from './Table.vue'
 import CalcRow from './CalcRow.vue'
 import Column from '@/enums/Column'
-import type Quarter from '@/enums/Quarter'
+import type Quarters from '@/types/Quarters'
 
-const props = defineProps<{ quarters: { [key in Quarter]: QuarterData } }>()
+const props = defineProps<{ quarters: Quarters }>()
 
 const columns: Column[] = [Column.Period, Column.Income, Column.Contribs]
 </script>
