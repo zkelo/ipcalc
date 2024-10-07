@@ -6,6 +6,7 @@ import { computed, type ComputedRef } from 'vue'
 import Quarter from '@/enums/Quarter'
 import type Quarters from '@/types/Quarters'
 import type Periods from '@/types/Periods'
+import format from '@/helpers/format'
 
 const OVERINCOME_AMOUNT: number = 300_000
 const OVERINCOME_MULTIPLIER: number = 0.01
@@ -15,8 +16,6 @@ const props = defineProps<{
   periods: Periods
   rate: number
 }>()
-
-const formatter = Intl.NumberFormat()
 
 const columns: Column[] = [
   Column.Period,
@@ -91,28 +90,24 @@ function calcPrepayment(period: Period): number {
   const result: number = tax[period].value - contribs[period].value - prevPrepayment
   return result < 0 ? 0 : result
 }
-
-function formatNumber(number: number): string {
-  return formatter.format(number)
-}
 </script>
 
 <template>
   <Table :columns="columns">
     <tr v-for="(item, period) in props.periods" :key="period">
       <td>{{ item.period }}</td>
-      <td>{{ formatNumber(income[item.period].value) }}</td>
-      <td>{{ formatNumber(contribs[item.period].value) }}</td>
-      <td>{{ formatNumber(tax[item.period].value) }}</td>
-      <td>{{ formatNumber(prepayment[item.period].value) }}</td>
+      <td>{{ format(income[item.period].value) }}</td>
+      <td>{{ format(contribs[item.period].value) }}</td>
+      <td>{{ format(tax[item.period].value) }}</td>
+      <td>{{ format(prepayment[item.period].value) }}</td>
     </tr>
     <tr>
       <td colspan="4"><strong>Доход свыше 300 тыс. руб.</strong></td>
-      <td colspan="1">{{ formatNumber(overincome) }}</td>
+      <td colspan="1">{{ format(overincome) }}</td>
     </tr>
     <tr>
       <td colspan="4"><strong>1% от дохода свыше 300 тыс. руб.</strong></td>
-      <td colspan="1">{{ formatNumber(overincomePercent) }}</td>
+      <td colspan="1">{{ format(overincomePercent) }}</td>
     </tr>
   </Table>
 </template>
