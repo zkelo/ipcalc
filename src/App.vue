@@ -11,7 +11,7 @@ import type Periods from './types/Periods'
 import Settings from './storage/Settings'
 
 const rate: Ref<number> = ref<number>(6)
-const yearContribs: Ref<number> = ref<number>(49500)
+const yearContribs: Ref<number> = ref<number>(49_500)
 
 const quarters: Quarters = {
   [Quarter.First]: { quarter: Quarter.First, income: ref<number>(0), contribs: ref<number>(0) },
