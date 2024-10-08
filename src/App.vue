@@ -8,7 +8,7 @@ import Quarter from './enums/Quarter'
 import Period from './enums/Period'
 import type Quarters from './types/Quarters'
 import type Periods from './types/Periods'
-import Settings from './storage/Data'
+import Data from './storage/Data'
 
 const rate: Ref<number> = ref<number>(6)
 const yearContribs: Ref<number> = ref<number>(49_500)
@@ -20,7 +20,7 @@ const quarters: Quarters = {
   [Quarter.Fourth]: { quarter: Quarter.Fourth, income: ref<number>(0), contribs: ref<number>(0) }
 }
 
-Settings.parse(quarters)
+Data.parse(quarters)
 
 const periods: Periods = {
   [Period.ThreeMonths]: {
