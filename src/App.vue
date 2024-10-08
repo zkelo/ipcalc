@@ -8,7 +8,7 @@ import Quarter from './enums/Quarter'
 import Period from './enums/Period'
 import type Quarters from './types/Quarters'
 import type Periods from './types/Periods'
-import Settings from './storage/Settings'
+import Settings from './storage/Data'
 
 const rate: Ref<number> = ref<number>(6)
 const yearContribs: Ref<number> = ref<number>(49_500)
