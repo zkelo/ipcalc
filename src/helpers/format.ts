@@ -1,5 +1,5 @@
 const formatter: Intl.NumberFormat = Intl.NumberFormat()
 
-export default function format(n: number) {
+export default function (n: number) {
   return formatter.format(n)
 }
