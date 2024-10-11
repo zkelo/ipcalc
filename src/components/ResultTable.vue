@@ -7,6 +7,7 @@ import Quarter from '@/enums/Quarter'
 import type Quarters from '@/types/Quarters'
 import type Periods from '@/types/Periods'
 import format from '@/helpers/format'
+import { SettingPostfix } from '@/enums/Setting'
 
 const OVERINCOME_AMOUNT: number = 300_000
 const OVERINCOME_MULTIPLIER: number = 0.01
@@ -26,17 +27,27 @@ const columns: Column[] = [
 ]
 
 const income: { [key in Period]: ComputedRef<number> } = {
-  [Period.ThreeMonths]: computed((): number => calcPeriodProp('income', Period.ThreeMonths)),
-  [Period.HalfYear]: computed((): number => calcPeriodProp('income', Period.HalfYear)),
-  [Period.NineMonths]: computed((): number => calcPeriodProp('income', Period.NineMonths)),
-  [Period.Year]: computed((): number => calcPeriodProp('income', Period.Year))
+  [Period.ThreeMonths]: computed((): number =>
+    calcPeriodProp(SettingPostfix.Income, Period.ThreeMonths)
+  ),
+  [Period.HalfYear]: computed((): number => calcPeriodProp(SettingPostfix.Income, Period.HalfYear)),
+  [Period.NineMonths]: computed((): number =>
+    calcPeriodProp(SettingPostfix.Income, Period.NineMonths)
+  ),
+  [Period.Year]: computed((): number => calcPeriodProp(SettingPostfix.Income, Period.Year))
 }
 
 const contribs: { [key in Period]: ComputedRef<number> } = {
-  [Period.ThreeMonths]: computed((): number => calcPeriodProp('contribs', Period.ThreeMonths)),
-  [Period.HalfYear]: computed((): number => calcPeriodProp('contribs', Period.HalfYear)),
-  [Period.NineMonths]: computed((): number => calcPeriodProp('contribs', Period.NineMonths)),
-  [Period.Year]: computed((): number => calcPeriodProp('contribs', Period.Year))
+  [Period.ThreeMonths]: computed((): number =>
+    calcPeriodProp(SettingPostfix.Contribs, Period.ThreeMonths)
+  ),
+  [Period.HalfYear]: computed((): number =>
+    calcPeriodProp(SettingPostfix.Contribs, Period.HalfYear)
+  ),
+  [Period.NineMonths]: computed((): number =>
+    calcPeriodProp(SettingPostfix.Contribs, Period.NineMonths)
+  ),
+  [Period.Year]: computed((): number => calcPeriodProp(SettingPostfix.Contribs, Period.Year))
 }
 
 const tax: { [key in Period]: ComputedRef<number> } = {
