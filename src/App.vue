@@ -9,6 +9,9 @@ import Period from './enums/Period'
 import type Quarters from './types/Quarters'
 import type Periods from './types/Periods'
 import Data from './storage/Data'
+import quarterWatcher from './helpers/quarterWatcher'
+
+const year: number = new Date().getFullYear()
 
 const rate: Ref<number> = ref<number>(6)
 const yearContribs: Ref<number> = ref<number>(49_500)
@@ -19,8 +22,6 @@ const quarters: Quarters = {
   [Quarter.Third]: { quarter: Quarter.Third, income: ref<number>(0), contribs: ref<number>(0) },
   [Quarter.Fourth]: { quarter: Quarter.Fourth, income: ref<number>(0), contribs: ref<number>(0) }
 }
-
-Data.parse(quarters)
 
 const periods: Periods = {
   [Period.ThreeMonths]: {
@@ -49,6 +50,13 @@ function distrib(): void {
   const contrib: number = +yearContribs.value / 4
   quarterList.value.forEach((quarter: QuarterData): number => (quarter.contribs.value = contrib))
 }
+
+function setupWatchers(): void {
+  quarterList.value.forEach(quarterWatcher)
+}
+
+Data.parse(quarters)
+setupWatchers()
 </script>
 
 <template>
@@ -84,7 +92,7 @@ function distrib(): void {
         <span>Все введённые данные сохраняются только в вашем браузере</span>
       </div>
       <div>
-        <span>&copy; 2024 <a href="https://zkelo.ru" target="_blank">ZKelo</a></span>
+        <span>&copy; {{ year }} <a href="https://zkelo.ru" target="_blank">ZKelo</a></span>
       </div>
     </div>
   </div>
