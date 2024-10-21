@@ -64,9 +64,14 @@ const prepayment: { [key in Period]: ComputedRef<number> } = {
   [Period.Year]: computed((): number => calcPrepayment(Period.Year))
 }
 
-const overincome: ComputedRef<number> = computed(
-  (): number => income[Period.Year].value - OVERINCOME_AMOUNT
-)
+const overincome: ComputedRef<number> = computed((): number => {
+  const yearIncome = income[Period.Year].value
+  if (yearIncome <= OVERINCOME_AMOUNT) {
+    return 0
+  }
+
+  return yearIncome - OVERINCOME_AMOUNT
+})
 
 const overincomePercent: ComputedRef<number> = computed(
   (): number => overincome.value * OVERINCOME_MULTIPLIER
