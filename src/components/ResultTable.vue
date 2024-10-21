@@ -26,6 +26,8 @@ const columns: Column[] = [
   Column.Prepayment
 ]
 
+// TODO Можно создавать `income`, `contribs`, `tax` и `prepayment`
+// с помощью маппинга
 const income: { [key in Period]: ComputedRef<number> } = {
   [Period.ThreeMonths]: computed((): number =>
     calcPeriodProp(SettingPostfix.Income, Period.ThreeMonths)
