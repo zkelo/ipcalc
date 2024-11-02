@@ -1,15 +1,15 @@
 import Quarter, { names } from '@/enums/Quarter'
 import Setting, { SettingPostfix } from '@/enums/Setting'
 import type QuarterData from '@/interfaces/QuarterData'
-import { capitalize, watch } from 'vue'
+import { capitalize, watch, type WatchCallback } from 'vue'
 
 function getSetting(quater: Quarter, postfix: SettingPostfix): Setting {
   const prop: string = capitalize(postfix)
-  const key = `${names[quater]}Quarter${prop}`
+  const key: string = `${names[quater]}Quarter${prop}`
   return Setting[key as keyof typeof Setting]
 }
 
-function generateWatcher(quarter: Quarter, postfix: SettingPostfix) {
+function generateWatcher(quarter: Quarter, postfix: SettingPostfix): WatchCallback {
   return (value: number): void => {
     const setting: Setting = getSetting(quarter, postfix)
     localStorage.setItem(setting, value.toString())

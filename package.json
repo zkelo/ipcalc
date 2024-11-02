@@ -13,10 +13,6 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
-  "dependencies": {
-    "primevue": "^4.2.1",
-    "vue": "^3.4.29"
-  },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
@@ -33,12 +29,14 @@
     "jsdom": "^24.1.0",
     "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
+    "primevue": "^4.2.1",
     "sass-embedded": "^1.79.3",
     "typescript": "~5.4.0",
     "vite": "^5.3.1",
     "vite-plugin-purgecss-updated-v5": "^1.2.1",
     "vite-plugin-vue-devtools": "^7.3.1",
     "vitest": "^1.6.0",
+    "vue": "^3.5.12",
     "vue-tsc": "^2.0.21"
   }
 }
