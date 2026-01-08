@@ -7,7 +7,7 @@ import type QuarterData from './interfaces/QuarterData'
 import Quarter from './enums/Quarter'
 import Period from './enums/Period'
 import type Quarters from './types/Quarters'
-import type Periods from './types/Periods'
+import type BillingPeriods from './types/Periods'
 import Data from './storage/Data'
 import quarterWatcher from './helpers/quarterWatcher'
 
@@ -23,7 +23,7 @@ const quarters: Quarters = {
   [Quarter.Fourth]: { quarter: Quarter.Fourth, income: ref<number>(0), contribs: ref<number>(0) }
 }
 
-const periods: Periods = {
+const periods: BillingPeriods = {
   [Period.ThreeMonths]: {
     period: Period.ThreeMonths,
     quarters: [Quarter.First]

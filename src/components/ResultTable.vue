@@ -5,7 +5,7 @@ import Period from '@/enums/Period'
 import { computed, type ComputedRef } from 'vue'
 import Quarter from '@/enums/Quarter'
 import type Quarters from '@/types/Quarters'
-import type Periods from '@/types/Periods'
+import type BillingPeriods from '@/types/Periods'
 import format from '@/helpers/format'
 import { SettingPostfix } from '@/enums/Setting'
 
@@ -14,7 +14,7 @@ const OVERINCOME_MULTIPLIER: number = 0.01
 
 const props = defineProps<{
   quarters: Quarters
-  periods: Periods
+  periods: BillingPeriods
   rate: number
 }>()
 
