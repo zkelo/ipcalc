@@ -14,7 +14,7 @@ import quarterWatcher from './helpers/quarterWatcher'
 const year: number = new Date().getFullYear()
 
 const rate: Ref<number> = ref<number>(6)
-const yearContribs: Ref<number> = ref<number>(49_500)
+const yearContribs: Ref<number> = ref<number>(57_390)
 
 const quarters: Quarters = {
   [Quarter.First]: { quarter: Quarter.First, income: ref<number>(0), contribs: ref<number>(0) },

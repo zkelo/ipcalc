@@ -19,7 +19,9 @@ function generateWatcher(quarter: Quarter, postfix: SettingPostfix) {
 const incomeWatcher = (quarter: Quarter) => generateWatcher(quarter, SettingPostfix.Income)
 const contribsWatcher = (quarter: Quarter) => generateWatcher(quarter, SettingPostfix.Contribs)
 
-export default (item: QuarterData): void => {
+const quarterWatcher = (item: QuarterData): void => {
   watch(item.income, incomeWatcher(item.quarter))
   watch(item.contribs, contribsWatcher(item.quarter))
 }
+
+export default quarterWatcher
