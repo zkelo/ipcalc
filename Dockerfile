@@ -1,11 +1,11 @@
-FROM dhi.io/node:20-alpine3.23
+FROM node:20-alpine AS build
+WORKDIR /app
 
 COPY . /app
-WORKDIR /app
 
 RUN npm i && npm run build
 
 EXPOSE 8745
 
 ENTRYPOINT [ "npx" ]
-CMD ["-y", "http-server", "-p 8745", "dist"]
+CMD ["-y", "http-server", "-p 8745", "."]
